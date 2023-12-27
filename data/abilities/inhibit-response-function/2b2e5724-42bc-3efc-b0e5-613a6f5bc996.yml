@@ -1,0 +1,41 @@
+- id: 2b2e5724-42bc-3efc-b0e5-613a6f5bc996
+  name: IEC 61850 - Delete File
+  description: >-
+    IEC 61850 Service: DeleteFile 
+
+    This command is used to delete a file from a server. 
+
+    Maps to MMS function FileDelete.
+  tactic: inhibit-response-function
+  technique:
+    attack_id: T0809
+    name: Data Destruction
+  platforms:
+    windows:
+      psh, cmd:
+        command: '.\iec61850_actions.exe delete file #{iec61850.file.name} #{iec61850.server.ip}'
+        payloads:
+        - iec61850_actions.exe
+        timeout: 360
+    darwin:
+      sh:
+        command: './iec61850_actions_darwin delete file #{iec61850.file.name} #{iec61850.server.ip}'
+        payloads:
+        - iec61850_actions_darwin
+        timeout: 360
+    linux:
+      sh:
+        command: './iec61850_actions delete file #{iec61850.file.name} #{iec61850.server.ip}'
+        payloads:
+        - iec61850_actions
+        timeout: 360
+  repeatable: true
+  plugin: iec61850
+  additional_info:
+    facts:
+      iec61850.file.name:
+        default: null
+        description: Name of a file
+      iec61850.server.ip:
+        default: null
+        description: IP address of the server

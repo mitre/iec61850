@@ -1,0 +1,42 @@
+- id: 4c1138da-50b9-3744-99ea-1310690f2743
+  name: IEC 61850 - Get Log
+  description: >-
+    IEC 61850 Service: QueryLogAfter 
+
+    This command is used to read the entries of a specified log. Will query the log
+    after the oldest (first) entry. 
+
+    Maps to MMS function ReadJournal.
+  tactic: collection
+  technique:
+    attack_id: T0801
+    name: Monitor Process State
+  platforms:
+    windows:
+      psh, cmd:
+        command: '.\iec61850_actions.exe get log #{iec61850.lcb.name} #{iec61850.server.ip}'
+        payloads:
+        - iec61850_actions.exe
+        timeout: 360
+    darwin:
+      sh:
+        command: './iec61850_actions_darwin get log #{iec61850.lcb.name} #{iec61850.server.ip}'
+        payloads:
+        - iec61850_actions_darwin
+        timeout: 360
+    linux:
+      sh:
+        command: './iec61850_actions get log #{iec61850.lcb.name} #{iec61850.server.ip}'
+        payloads:
+        - iec61850_actions
+        timeout: 360
+  repeatable: true
+  plugin: iec61850
+  additional_info:
+    facts:
+      iec61850.lcb.name:
+        default: null
+        description: Name of a log control block
+      iec61850.server.ip:
+        default: null
+        description: IP address of the server

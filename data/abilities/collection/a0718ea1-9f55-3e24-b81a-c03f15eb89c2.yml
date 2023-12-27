@@ -1,0 +1,38 @@
+- id: a0718ea1-9f55-3e24-b81a-c03f15eb89c2
+  name: IEC 61850 - Get Files
+  description: >-
+    IEC 61850 Service: GetFile 
+
+    This command is used to read the list of files on a server. 
+
+    Maps to MMS function FileOpen.
+  tactic: collection
+  technique:
+    attack_id: T0802
+    name: Automated Collection
+  platforms:
+    windows:
+      psh, cmd:
+        command: '.\iec61850_actions.exe get files #{iec61850.server.ip}'
+        payloads:
+        - iec61850_actions.exe
+        timeout: 360
+    darwin:
+      sh:
+        command: './iec61850_actions_darwin get files #{iec61850.server.ip}'
+        payloads:
+        - iec61850_actions_darwin
+        timeout: 360
+    linux:
+      sh:
+        command: './iec61850_actions get files #{iec61850.server.ip}'
+        payloads:
+        - iec61850_actions
+        timeout: 360
+  repeatable: true
+  plugin: iec61850
+  additional_info:
+    facts:
+      iec61850.server.ip:
+        default: null
+        description: IP address of the server

@@ -1,0 +1,67 @@
+- id: 6ac44da4-f546-3e33-be1a-829b173b660f
+  name: IEC 61850 - Get Data Objects
+  description: >-
+    IEC 61850 Service: GetLogicalNodeDirectory 
+
+    This command is used to read the list of data objects from a server or logical
+    node. 
+
+    Maps to MMS function GetNameList.
+  tactic: collection
+  technique:
+    attack_id: T0802
+    name: Automated Collection
+  platforms:
+    windows:
+      psh, cmd:
+        command: '.\iec61850_actions.exe get data_objects #{iec61850.node.name} #{iec61850.server.ip}'
+        payloads:
+        - iec61850_actions.exe
+        timeout: 360
+        parsers:
+          plugins.iec61850.app.parsers.data_model:
+            - source: iec61850.device.name
+              edge: has_node
+              target: iec61850.node.name
+            - source: iec61850.node.name
+              edge: has_object
+              target: iec61850.object.name
+    darwin:
+      sh:
+        command: './iec61850_actions_darwin get data_objects #{iec61850.node.name}
+          #{iec61850.server.ip}'
+        payloads:
+        - iec61850_actions_darwin
+        timeout: 360
+        parsers:
+          plugins.iec61850.app.parsers.data_model:
+            - source: iec61850.device.name
+              edge: has_node
+              target: iec61850.node.name
+            - source: iec61850.node.name
+              edge: has_object
+              target: iec61850.object.name
+    linux:
+      sh:
+        command: './iec61850_actions get data_objects #{iec61850.node.name} #{iec61850.server.ip}'
+        payloads:
+        - iec61850_actions
+        timeout: 360
+        parsers:
+          plugins.iec61850.app.parsers.data_model:
+            - source: iec61850.device.name
+              edge: has_node
+              target: iec61850.node.name
+            - source: iec61850.node.name
+              edge: has_object
+              target: iec61850.object.name
+  repeatable: true
+  plugin: iec61850
+  additional_info:
+    facts:
+      iec61850.node.name:
+        default: null
+        description: Name of a logical node
+      iec61850.server.ip:
+        default: null
+        description: IP address of the server

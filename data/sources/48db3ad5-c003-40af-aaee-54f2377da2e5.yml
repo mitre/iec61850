@@ -1,0 +1,24 @@
+id: 48db3ad5-c003-40af-aaee-54f2377da2e5
+name: IEC 61850 Sample Facts
+facts:
+- trait: iec61850.object.name
+  value: simpleIOGenericIO/GGIO1.SPCSO1
+- trait: iec61850.object.datatype
+  value: bool
+- trait: iec61850.object.newvalue
+  value: 'true'
+- trait: iec61850.object.newvalue
+  value: 'false'
+- trait: iec61850.attribute.name
+  value: simpleIOGenericIO/LLN0.NamPlt.vendor
+- trait: iec61850.attribute.fc
+  value: DC
+- trait: iec61850.attribute.datatype
+  value: str
+- trait: iec61850.attribute.newvalue
+  value: TestVendor
+- trait: iec61850.server.ip
+  value: 127.0.0.1
+plugin: iec61850
+rules: []
+relationships: []

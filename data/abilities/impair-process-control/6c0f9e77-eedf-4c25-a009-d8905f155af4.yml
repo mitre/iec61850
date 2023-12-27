@@ -1,0 +1,102 @@
+- id: 6c0f9e77-eedf-4c25-a009-d8905f155af4
+  name: IEC 61850 - Toggle Object
+  description: >-
+    This ability is used to toggle a controllable data object. Only implemented for
+    objects with a boolean stVal, this ability will control the data object from 
+    false to true and back to false or vice-versa. Control operations can be applied 
+    to data objects that have a control model (ctlModel) attribute that is not equal 
+    to 0 (status only). Supports direct-operate, select-before-operate,
+    and select-before-operate-with-value control models. 
+
+    This ability is a procedure linking multiple calls to the IEC 61850 service Control,
+    which maps to the MMS function Write. 
+  tactic: impair-process-control
+  technique:
+    attack_id: T0855
+    name: Unauthorized Command Message
+  platforms:
+    windows:
+      psh, cmd:
+        command: '.\iec61850_actions.exe control #{iec61850.object.name} --bool
+          #{iec61850.object.newvalue} --toggle #{iec61850.server.ip}'
+        payloads:
+        - iec61850_actions.exe
+        timeout: 360
+        parsers:
+          plugins.iec61850.app.parsers.write:
+            - source: iec61850.device.name
+              edge: has_node
+              target: iec61850.node.name
+            - source: iec61850.node.name
+              edge: has_object
+              target: iec61850.object.name
+            - source: iec61850.object.name
+              edge: has_attribute
+              target: iec61850.attribute.name
+            - source: iec61850.attribute.name
+              edge: has_fc
+              target: iec61850.attribute.fc
+            - source: iec61850.attribute.name
+              edge: has_value
+              target: iec61850.attribute.value
+    darwin:
+      sh:
+        command: './iec61850_actions_darwin control #{iec61850.object.name} --bool
+          #{iec61850.object.newvalue} --toggle #{iec61850.server.ip}'
+        payloads:
+        - iec61850_actions_darwin
+        timeout: 360
+        parsers:
+          plugins.iec61850.app.parsers.write:
+            - source: iec61850.device.name
+              edge: has_node
+              target: iec61850.node.name
+            - source: iec61850.node.name
+              edge: has_object
+              target: iec61850.object.name
+            - source: iec61850.object.name
+              edge: has_attribute
+              target: iec61850.attribute.name
+            - source: iec61850.attribute.name
+              edge: has_fc
+              target: iec61850.attribute.fc
+            - source: iec61850.attribute.name
+              edge: has_value
+              target: iec61850.attribute.value
+    linux:
+      sh:
+        command: './iec61850_actions control #{iec61850.object.name} --bool
+          #{iec61850.object.newvalue} --toggle #{iec61850.server.ip}'
+        payloads:
+        - iec61850_actions
+        timeout: 360
+        parsers:
+          plugins.iec61850.app.parsers.write:
+            - source: iec61850.device.name
+              edge: has_node
+              target: iec61850.node.name
+            - source: iec61850.node.name
+              edge: has_object
+              target: iec61850.object.name
+            - source: iec61850.object.name
+              edge: has_attribute
+              target: iec61850.attribute.name
+            - source: iec61850.attribute.name
+              edge: has_fc
+              target: iec61850.attribute.fc
+            - source: iec61850.attribute.name
+              edge: has_value
+              target: iec61850.attribute.value
+  repeatable: true
+  plugin: iec61850
+  additional_info:
+    facts:
+      iec61850.object.name:
+        default: null
+        description: Name of a data object
+      iec61850.object.newvalue:
+        default: null
+        description: New control value of an object
+      iec61850.server.ip:
+        default: null
+        description: IP address of the server

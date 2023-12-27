@@ -1,0 +1,73 @@
+<div x-data="alpineIec61850()" x-init="initPage()">
+    <div>
+        <h2>IEC 61850 Protocol Plugin</h2>
+        <br>
+        <p>The IEC 61850 plugin for Caldera provides adversary emulation abilities specific to the IEC 61850 series of communication protocols.</p>
+    </div>
+    <hr>
+    <h3>Documentation</h3>
+    <span>
+        Get started by referencing the <a href="/docs/plugins/iec61850/iec61850.html" target="_blank">IEC 61850 Plugin Fieldmanual</a>.
+    </span>
+    <h3>Abilities</h3>
+    <div class="columns abilities is-multiline">
+
+        {% for a in abilities %}
+        <div class="column is-one-quarter p-1 m-0">
+            <div id="otbox" class="box p-3 m-1" @mouseleave="handleBoxExit">
+                <div class="abilitytags">
+                    <span class="tag tactic is-dark m-0 mb-1">{{a.tactic}}</span><br>
+                </div>
+                <div id="inner_otbox">
+                    <p>
+                        <span class="has-text-weight-bold">{{a.name}}</span>
+                        ({{a.technique_id}}: {{a.technique_name}})
+                    </p>
+                    <p class="help mb-0">{{a.description|safe}}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <h3>Adversaries</h3>
+    <span>There are no custom IEC 61850 adversaries at this time.</span>
+</div>
+
+<script>
+
+    function handleBoxExit(e) {
+        console.log("box exit trigger");
+        e.target.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function alpineIec61850() {
+        return {
+
+            name: '{{ name }}',
+            description: '{{ description }}',
+
+            initPage() {
+                console.log('initpage complete.')
+            }
+        };
+    }
+</script>
+
+<style>
+    #inner_otbox {
+        margin-right: 15px;
+    }
+
+    #otbox {
+        height: 200px;
+        background-color: var(--primary-color-translucent);
+        overflow-y: hidden;
+    }
+
+    #otbox:hover {
+        outline: 3px;
+        outline-color: var(--primary-color);
+        outline-style: solid;
+        overflow-y: scroll;
+    }
+</style>

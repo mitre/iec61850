@@ -1,0 +1,58 @@
+- id: f9308f14-e0d3-389e-9d77-ff2be9c3f34f
+  name: IEC 61850 - Get Logical Nodes
+  description: >-
+    IEC 61850 Service: GetServerDirectory 
+
+    This command is used to read the list of logical devices from a server. 
+
+    Maps to MMS function GetNameList.
+  tactic: collection
+  technique:
+    attack_id: T0802
+    name: Automated Collection
+  platforms:
+    windows:
+      psh, cmd:
+        command: '.\iec61850_actions.exe get logical_nodes #{iec61850.device.name}
+          #{iec61850.server.ip}'
+        payloads:
+        - iec61850_actions.exe
+        timeout: 360
+        parsers:
+          plugins.iec61850.app.parsers.data_model:
+            - source: iec61850.device.name
+              edge: has_node
+              target: iec61850.node.name
+    darwin:
+      sh:
+        command: './iec61850_actions_darwin get logical_nodes #{iec61850.device.name}
+          #{iec61850.server.ip}'
+        payloads:
+        - iec61850_actions_darwin
+        timeout: 360
+        parsers:
+          plugins.iec61850.app.parsers.data_model:
+            - source: iec61850.device.name
+              edge: has_node
+              target: iec61850.node.name
+    linux:
+      sh:
+        command: './iec61850_actions get logical_nodes #{iec61850.device.name} #{iec61850.server.ip}'
+        payloads:
+        - iec61850_actions
+        timeout: 360
+        parsers:
+          plugins.iec61850.app.parsers.data_model:
+            - source: iec61850.device.name
+              edge: has_node
+              target: iec61850.node.name
+  repeatable: true
+  plugin: iec61850
+  additional_info:
+    facts:
+      iec61850.device.name:
+        default: null
+        description: Name of a logical device
+      iiec61850.server.ip:
+        default: null
+        description: IP address of the server

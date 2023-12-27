@@ -1,0 +1,89 @@
+- id: 9f7757da-1da9-3b35-90f3-fdab578be198
+  name: IEC 61850 - Get Log Blocks
+  description: >-
+    This command is used to read the list of log control blocks (LCB) from a server
+    and the values associated with the LCB. When traversing the data model, log control
+    blocks are assumed to be in logical node zero (LLN0). 
+
+    This functionality does not map directly to an IEC 61850 service or MMS function.
+  tactic: collection
+  technique:
+    attack_id: T0802
+    name: Automated Collection
+  platforms:
+    windows:
+      psh, cmd:
+        command: '.\iec61850_actions.exe get log_blocks #{iec61850.server.ip}'
+        payloads:
+        - iec61850_actions.exe
+        timeout: 360
+        parsers:
+          plugins.iec61850.app.parsers.lcb:
+            - source: iec61850.attribute.name
+              edge: has_fc
+              target: iec61850.attribute.fc
+            - source: iec61850.attribute.name
+              edge: has_datatype
+              target: iec61850.attribute.datatype
+            - source: iec61850.attribute.name
+              edge: has_value
+              target: iec61850.attribute.value
+            - source: iec61850.device.name
+              edge: has_node
+              target: iec61850.node.name
+            - source: iec61850.device.name
+              edge: has_lcb
+              target: iec61850.lcb.name
+    darwin:
+      sh:
+        command: './iec61850_actions_darwin get log_blocks #{iec61850.server.ip}'
+        payloads:
+        - iec61850_actions_darwin
+        timeout: 360
+        parsers:
+          plugins.iec61850.app.parsers.lcb:
+            - source: iec61850.attribute.name
+              edge: has_fc
+              target: iec61850.attribute.fc
+            - source: iec61850.attribute.name
+              edge: has_datatype
+              target: iec61850.attribute.datatype
+            - source: iec61850.attribute.name
+              edge: has_value
+              target: iec61850.attribute.value
+            - source: iec61850.device.name
+              edge: has_node
+              target: iec61850.node.name
+            - source: iec61850.device.name
+              edge: has_lcb
+              target: iec61850.lcb.name
+    linux:
+      sh:
+        command: './iec61850_actions get log_blocks #{iec61850.server.ip}'
+        payloads:
+        - iec61850_actions
+        timeout: 360
+        parsers:
+          plugins.iec61850.app.parsers.lcb:
+            - source: iec61850.attribute.name
+              edge: has_fc
+              target: iec61850.attribute.fc
+            - source: iec61850.attribute.name
+              edge: has_datatype
+              target: iec61850.attribute.datatype
+            - source: iec61850.attribute.name
+              edge: has_value
+              target: iec61850.attribute.value
+            - source: iec61850.device.name
+              edge: has_node
+              target: iec61850.node.name
+            - source: iec61850.device.name
+              edge: has_lcb
+              target: iec61850.lcb.name
+  repeatable: true
+  plugin: iec61850
+  additional_info:
+    facts:
+      iec61850.server.ip:
+        default: null
+        description: IP address of the server

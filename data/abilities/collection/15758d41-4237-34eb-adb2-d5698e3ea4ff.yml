@@ -1,0 +1,36 @@
+- id: 15758d41-4237-34eb-adb2-d5698e3ea4ff
+  name: IEC 61850 - Get Reports
+  description: >-
+    This command is used to read the list of reports published by a server. 
+
+    This functionality does not map directly to an IEC 61850 service or MMS function.
+  tactic: collection
+  technique:
+    attack_id: T0802
+    name: Automated Collection
+  platforms:
+    windows:
+      psh, cmd:
+        command: '.\iec61850_actions.exe get reports #{iec61850.server.ip}'
+        payloads:
+        - iec61850_actions.exe
+        timeout: 360
+    darwin:
+      sh:
+        command: './iec61850_actions_darwin get reports #{iec61850.server.ip}'
+        payloads:
+        - iec61850_actions_darwin
+        timeout: 360
+    linux:
+      sh:
+        command: './iec61850_actions get reports #{iec61850.server.ip}'
+        payloads:
+        - iec61850_actions
+        timeout: 360
+  repeatable: true
+  plugin: iec61850
+  additional_info:
+    facts:
+      iec61850.server.ip:
+        default: null
+        description: IP address of the server

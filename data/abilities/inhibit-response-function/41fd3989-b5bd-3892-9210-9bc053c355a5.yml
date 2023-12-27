@@ -1,0 +1,45 @@
+- id: 41fd3989-b5bd-3892-9210-9bc053c355a5
+  name: IEC 61850 - Delete Data Set
+  description: >-
+    IEC 61850 Service: DeleteDataSet 
+
+    This command is used to delete a data set from a server. Note: not all data sets
+    are deletable in accordance with the server settings. Performing a `get data_sets`
+    operation can confirm if the server holds deletable data sets. 
+
+    Maps to MMS function DeleteNamedVariableList.
+  tactic: inhibit-response-function
+  technique:
+    attack_id: T0809
+    name: Data Destruction
+  platforms:
+    windows:
+      psh, cmd:
+        command: '.\iec61850_actions.exe delete data_set #{iec61850.dataset.name}
+          #{iec61850.server.ip}'
+        payloads:
+        - iec61850_actions.exe
+        timeout: 360
+    darwin:
+      sh:
+        command: './iec61850_actions_darwin delete data_set #{iec61850.dataset.name}
+          #{iec61850.server.ip}'
+        payloads:
+        - iec61850_actions_darwin
+        timeout: 360
+    linux:
+      sh:
+        command: './iec61850_actions delete data_set #{iec61850.dataset.name} #{iec61850.server.ip}'
+        payloads:
+        - iec61850_actions
+        timeout: 360
+  repeatable: true
+  plugin: iec61850
+  additional_info:
+    facts:
+      iec61850.dataset.name:
+        default: null
+        description: Name of a dataset
+      iiec61850.server.ip:
+        default: null
+        description: IP address of the server
