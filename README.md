@@ -1,8 +1,8 @@
 # MITRE Caldera™ for OT plugin: IEC 61850
 
-A [MITRE Caldera™ for OT](https://github.com/mitre/caldera-ot) plugin supplying [Caldera](https://github.com/mitre/caldera) with IEC 61850 protocol TTPs mapped to MITRE ATT&CK® for ICS [v14](https://attack.mitre.org/resources/updates/updates-october-2023/). This is part of a series of plugins that provide added threat emulation capability for Operational Technology (OT) environments. 
+A [MITRE Caldera™ for OT](https://github.com/mitre/caldera-ot) plugin supplying [Caldera](https://github.com/mitre/caldera) with IEC 61850 standard series TTPs mapped to MITRE ATT&CK® for ICS [v14](https://attack.mitre.org/resources/updates/updates-october-2023/). This is part of a series of plugins that provide added threat emulation capability for Operational Technology (OT) environments. 
 
-Currently this plugin provides coverage for IEC 61850 services that use Manufacturing Message Specification (MMS) messages. These are unicast-type messages used to exchange analog or digital state information about the controlled process. The other message types defined by IEC 61850, including Generic Object Oriented Substation Event (GOOSE) and Sampled Value (SV) messages, are not supported in this release.
+Currently this plugin provides coverage for IEC 61850 services that use Manufacturing Message Specification (MMS) protocol messages. These are unicast-type messages used to exchange analog or digital state information about the controlled process. The other message types defined by the IEC 61850 series, including Generic Object Oriented System Event (GOOSE) and Sampled Value (SV) messages, are not supported in this release.
 
 Full IEC 61850 plugin [documentation](docs/iec61850.md) can be viewed as part of fieldmanual, once the Caldera server is running. 
 
