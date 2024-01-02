@@ -5,7 +5,7 @@ client_t client__create(FILE *output, FILE *log)
   client_t c;
   c.con = IedConnection_create();
   c.error = IED_ERROR_UNKNOWN;
-  c.output = stdout;
+  c.output = output;
   c.log = log;
 
   return c;

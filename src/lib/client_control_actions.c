@@ -15,7 +15,6 @@ bool control_object(client_t *self,
    * always false, the time delay argument is ignored.
    */
   opTime = 0;
-  ControlModel cm = ControlObjectClient_getControlModel(*controlClient);
 
   bool success = false;
   bool selected = !sbo && !sboWithValue;

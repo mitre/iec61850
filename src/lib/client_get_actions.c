@@ -52,7 +52,7 @@ void query_log(client_t *c,
 
 void read_log(client_t *c, const char *lcbName, result_t *res)
 {
-  MmsValue *lcbValue = IedConnection_readObject(c->con, &c->error, lcbName, IEC61850_FC_LG);
+  MmsValue const *lcbValue = IedConnection_readObject(c->con, &c->error, lcbName, IEC61850_FC_LG);
 
   if ((c->error == IED_ERROR_OK) && (MmsValue_getType(lcbValue) != MMS_DATA_ACCESS_ERROR)) {
     char logRef[BUFSIZE + 1];
@@ -86,7 +86,6 @@ void read_value(client_t *c, const char *daName, const char *fcString, result_t 
   }
 
   if (mmsVal && (c->error == IED_ERROR_OK)) {
-    MmsDataAccessError err = MmsValue_getDataAccessError(mmsVal);
     if (MmsValue_getType(mmsVal) == MMS_DATA_ACCESS_ERROR) {
       flogf(c->log, "read '%s' value failed: access error\n", daName);
     } else {
@@ -111,7 +110,7 @@ void read_value(client_t *c, const char *daName, const char *fcString, result_t 
   }
 }
 
-void traverse_files(client_t *c, const char *dirName, result_t *res)
+void traverse_files(client_t *c, result_t *res)
 {
   LinkedList rootDirectory = IedConnection_getFileDirectory(c->con, &c->error, NULL);
   if ((rootDirectory != NULL) && (c->error == IED_ERROR_OK)) {
@@ -193,7 +192,7 @@ void traverse_data_attributes(client_t *c,
 
       attribute = LinkedList_getNext(attribute);
       FunctionalConstraint fc;
-      char *parsedName = parse_da_name(qualifiedDaName, &fc);
+      char const *parsedName = parse_da_name(qualifiedDaName, &fc);
       traverse_data_attributes(c, parsedName, dataRequest, res);
     }
   } else {
@@ -332,7 +331,7 @@ void traverse_logical_nodes(client_t *c, const char *ldName, DataRequest dataReq
 void traverse_log_blocks(client_t *c, const char *ldName, result_t *res)
 {
   const char *zeroBlock = "LLN0";
-  char *lnZero = create_qualified_name(ldName, '/', zeroBlock);
+  char const *lnZero = create_qualified_name(ldName, '/', zeroBlock);
   if (!lnZero) {
     res->code = ALLOCATION_FAILURE;
     flogf(c->log, "read failed: malloc error");
