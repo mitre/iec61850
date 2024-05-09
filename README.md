@@ -16,7 +16,7 @@ To run Caldera along with the IEC 61850 plugin:
 ```
 git clone https://github.com/mitre/iec61850.git
 ```
-3. Download the required compiled payload(s) from the [__Releases__](https://github.com/mitre/iec61850-payloads/releases) section of the `iec61850-payloads` repository.
+3. Download the required compiled payload(s) from the [__Releases__](https://github.com/mitre/iec61850-payloads/releases) section of the `iec61850-payloads` repository. The downloadable payloads are available under the __Assets__ header of the latest release.
 4. Save the downloaded payload file(s) in the `caldera/plugins/iec61850/payloads` directory of your Caldera installation.
 5. Enable the iec61850 plugin. To do this, add `- iec61850` to the list of enabled plugins in either `conf/local.yml` or `conf/default.yml` (if running Caldera in insecure mode)
 
