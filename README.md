@@ -21,9 +21,9 @@ git clone https://github.com/mitre/iec61850.git
 5. Enable the iec61850 plugin. To do this, add `- iec61850` to the list of enabled plugins in either `conf/local.yml` or `conf/default.yml` (if running Caldera in insecure mode)
 
 ### Version
-This plugin has been tested with Caldera v4.2.0 (released 19 June 2023). This can be cloned using the following method:
+This plugin has been tested with Caldera v4.2.0 and v5.0.0. The latest version of Caldera can be cloned using the following method:
 ```
-git clone https://github.com/mitre/caldera.git --recursive --branch 4.2.0
+git clone https://github.com/mitre/caldera.git --recursive
 ```
 
 ### Plugin Payload Source Code
