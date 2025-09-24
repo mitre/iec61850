@@ -30,6 +30,3 @@ src/third_party/libiec61850-1.5.1
 
 # test files
 log_status.db
-
-# payloads
-payloads/*
