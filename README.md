@@ -1,6 +1,6 @@
 # MITRE Caldera™ for OT plugin: IEC 61850
 
-A [MITRE Caldera™ for OT](https://github.com/mitre/caldera-ot) plugin supplying [Caldera](https://github.com/mitre/caldera) with IEC 61850 standard series TTPs mapped to MITRE ATT&CK® for ICS [v14](https://attack.mitre.org/resources/updates/updates-october-2023/). This is part of a series of plugins that provide added threat emulation capability for Operational Technology (OT) environments. 
+A [MITRE Caldera™ for OT](https://github.com/mitre/caldera-ot) plugin supplying [Apache Caldera](https://github.com/apache/caldera) with IEC 61850 standard series TTPs mapped to MITRE ATT&CK® for ICS [v14](https://attack.mitre.org/resources/updates/updates-october-2023/). This is part of a series of plugins that provide added threat emulation capability for Operational Technology (OT) environments. 
 
 Currently this plugin provides coverage for IEC 61850 services that use Manufacturing Message Specification (MMS) protocol messages. These are unicast-type messages used to exchange analog or digital state information about the controlled process. The other message types defined by the IEC 61850 series, including Generic Object Oriented System Event (GOOSE) and Sampled Value (SV) messages, are not supported in this release.
 
@@ -9,7 +9,7 @@ Full IEC 61850 plugin [documentation](docs/iec61850.md) can be viewed as part of
 ## Installation
 
 To run Caldera along with the IEC 61850 plugin:
-1. Download Caldera as detailed in the [Installation Guide](https://github.com/mitre/caldera)
+1. Download Apache Caldera as detailed in the [Installation Guide](https://github.com/apache/caldera)
 2. Copy this repository into Caldera's plugin directory: `caldera/plugins`. You can do this in (at least) two ways:
     1. Download the source code from the __Releases__ section of this repository and extract the archive file into the `caldera/plugins` directory.
     2. Use the command line to clone the repository. Navigate to the `caldera/plugins` directory and enter the following command:
@@ -23,7 +23,7 @@ git clone https://github.com/mitre/iec61850.git
 ### Version
 This plugin has been tested with Caldera v4.2.0 and v5.0.0. The latest version of Caldera can be cloned using the following method:
 ```
-git clone https://github.com/mitre/caldera.git --recursive
+git clone https://github.com/apache/caldera.git --recursive
 ```
 
 ### Plugin Payload Source Code
